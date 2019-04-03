@@ -1,4 +1,4 @@
-STAT 334. Applied Linear Models. 4 units
+# STAT 334. Applied Linear Models. 4 units
 
 Term Typically Offered: W, SP
 
