@@ -1,6 +1,10 @@
 # This script goes with notes "02_Simple Linear Regression Review 1"
 
 # Load the Corollas Data
+library(tidyverse)
+
+Corollas <- read_table("datasets/02_Corollas.txt")
+
 # In RStudio, use the "File>Import Dataset>From Text (base)..." command
 # Select the Corollas.txt file that you downloaded from PolyLearn
 # Click the Import button
