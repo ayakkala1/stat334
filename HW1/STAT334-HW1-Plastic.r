@@ -19,3 +19,22 @@ X <- cbind(x0,x1)
 # Here are some other matrices that you may need
 I <- diag(1,n)  # the n x n identity matrix
 J <- x0%*%t(x0) # an n x n matrix containing all 1's -- you could also use matrix(1,n,n) here
+
+b <- solve(t(X) %*% X) %*% (t(X) %*% y)
+
+variance <- sum((y - (t(x0) %*% y)/length(y)) ** 2)/(length(y) - 1)
+
+e <- (y - (X %*% b))
+
+MSE <- (t(e) %*% e) / (length(y) - ncol(X))
+
+covariance_mat <- MSE[1,1]*solve(t(X) %*% X)
+
+r <- (covariance_mat[1,2])/(covariance_mat[1,1] ** 0.5 * covariance_mat[2,2] ** 0.5)
+
+H <- X %*% solve(t(X) %*% X) %*% t(X)
+
+H[2,2]
+H[2,14]
+
+t(X %*% b) %*% e

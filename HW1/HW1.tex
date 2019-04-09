@@ -1,0 +1,340 @@
+\documentclass[10pt]{article}
+ 
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb, graphicx, multicol, array, enumerate}
+ 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+ 
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{answer}[2][Answer]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\renewcommand{\labelenumi}{\alph{enumi})}
+
+\begin{document}
+ 
+\title{Homework 1}
+\author{Anish Yakkala\\
+Course number: STAT 334}
+\maketitle
+ 
+\begin{problem}{1}
+$ $\newline
+When asked to state the simple linear regression model, a student wrote it as follows: 
+\[
+E[Y_{i}] = \beta_{0} + \beta_{1}X_{i} + \epsilon_{i}
+\]
+\end{problem}
+
+\begin{answer}{1}
+$ $\newline
+No the equation he gives is wrong. It is supposed to be...
+\[
+Y_{i} = \beta_{0} + \beta_{1}X_{i} + \epsilon_{i}
+\]
+\end{answer}
+
+\begin{problem}{2}
+$ $\newline
+In a simulation exercise, regression model $(1.1)$ applies with $\beta_{0}=100$, $\beta_{1} = 20$, and $\sigma^{2} = 25$.
+An observation on $Y$ will be made for $X=5$
+
+\begin{enumerate}
+    \item Can you state the exact probability that $Y$ will fall between $195$ and $205$? Explain
+    \item If the normal error regression model $(1.24)$ is applicable, can you now state the exact probability that Y will fall between $195$ and $205$? If so state it.
+\end{enumerate}
+
+\end{problem}
+
+\begin{answer}{2}
+$ $\newline
+\begin{enumerate}
+    \item No we cannot since we do not know the distribution of the residuals.
+    \item Yes we can since we know the residuals come from a normal distribution. In our model $X=5$ means that $E[Y] = 100 + 20*(5) = 200$ Since we know that $\sigma^{2}=25$ then we know that $\sigma = 5$. The difference $195$ and $205$ are both one standard deviation away from the mean. So we know the probability that $Y$ will between the range is approximately $0.6827$ by the $68-95-99.7$ rule.
+\end{enumerate}
+
+\end{answer}
+
+\begin{problem}{3}
+$ $\newline
+In Figure $1.6$, suppose that another $Y$ observation is obtained at $X=45$. Would $E[Y]$ for this new observation still be $104$? Would the $Y$ value for this new case again be $108$?
+\end{problem}
+
+\begin{answer}{3}
+Yes it would still be expected to be $104$, however we have no guarantee the actual value would be $108$.
+\end{answer}
+
+\begin{problem}{4}
+$ $\newline
+Problem 1.11, p. 34.  Answer the questions below rather than the question given in the book.
+\begin{enumerate}
+    \item Interpret the meaning of $\beta_{1}$ in the context of the problem.
+    \item Explain what having $\beta_{1} < 1$ means in terms of the success of the training program.
+    \item Interpret the meaning of $\beta_{0}$ in the context of the problem.
+    \item Is the value of $\beta_{0}$ meaningful in the context of the problem.
+    \item Overall, do you think that the training program increased production output. Explain why or why not. 
+\end{enumerate}
+\end{problem}
+
+\begin{answer}{4}
+$ $\newline
+\begin{enumerate}
+    \item For an increase in one unit of production output before the training is associated with an increase of 0.95 in the average production output after the training.
+    \item Having a $\beta_{1} = 0.95$ means that there is more of an effect for employees in the lower range of the explanatory variable compared to the employees in the higher range. 
+    \item At a production output before the training being $0$ we expect the average production output after the training to be $20$.
+    \item No since an $X$ value of $0$ is an extrapolation. Our data only included data within $[40,100]$.
+    \item Yes since the range of $E[Y]$ is $[58,115]$ which is entirely greater than the training before output, $[40,100]$.
+\end{enumerate}
+\end{answer}
+
+\begin{problem}{5}
+$ $\newline
+Show how the following expressions are written in terms of matrices:
+\begin{enumerate}
+    \item $Y_{i}-\^Y_{i} = e_{i}$
+    \item $\sum X_{i}e_{i} = 0$
+\end{enumerate}
+Assume $i = 1,\dots,4$
+\end{problem}
+
+\begin{answer}{5}
+$ $\newline
+\begin{enumerate}
+    \item \[
+\begin{bmatrix}
+    y_{1} \\
+    y_{2} \\
+    y_{3} \\
+    y_{4}
+\end{bmatrix}
+-
+\begin{bmatrix}
+   \^y_{1} \\
+   \^y_{2} \\
+   \^y_{3} \\
+   \^y_{4}
+\end{bmatrix}
+=
+\begin{bmatrix}
+    e_{1} \\
+    e_{2} \\
+    e_{3} \\
+    e_{4}
+\end{bmatrix}
+\]
+\item \[
+\begin{bmatrix}
+    x_{1} &
+    x_{2} &
+    x_{3} &
+    x_{4}
+\end{bmatrix}
+\begin{bmatrix}
+    e_{1} \\
+    e_{2} \\
+    e_{3} \\
+    e_{4}
+\end{bmatrix}
+=
+0
+\]
+\end{enumerate}
+\end{answer}
+
+\begin{problem}{6}
+$ $\newline
+Write out matrix equations to prove the following statements. (You may find Section 5.7 in the text helpful.)
+\begin{enumerate}
+    \item Them matrix $X^{'}X$ is symmetric.
+    \item Them matrix $H$ is symmetric.
+    \item Them matrix $H$ is idempotent.
+\end{enumerate}
+\end{problem}
+
+\begin{answer}{6}
+$ $\newline
+\begin{enumerate}
+    \item 
+    \[
+    (X^{'}X)^{'} = (X^{'}X^{'^{'}}) = X^{'}X
+    \]
+    \item
+    \begin{equation}
+    \begin{split}
+    (X(X^{'}X)^{-1}X^{'})^{'} & = (X^{'^{'}}(X^{'}X)^{-1^{'}}X^{'}) \\
+    & = (X(X^{'}X)^{-1^{'}}X^{'}) \\
+    & = (X(X^{'}X)^{'^{-1}}X^{'}) \\ 
+    & = (X(X^{'}X)^{-1}X^{'})
+    \end{split}
+    \end{equation}
+    \item
+    \begin{equation}
+    \begin{split}
+    HH & = (X(X^{'}X)^{-1}X^{'})(X(X^{'}X)^{-1}X^{'}) \\
+    & = (X(X^{'}X)^{-1}(X^{'}X)(X^{'}X)^{-1}X^{'}) \\
+    & = (X(X^{'}X)^{-1}IX^{'}) \\ 
+    & = (X(X^{'}X)^{-1}X^{'}) \\
+    & = H
+    \end{split}
+    \end{equation}
+    
+\end{enumerate}
+\end{answer}
+
+\begin{problem}{7}
+$ $\newline
+Read the introduction to Problem 1.19 on page $35$ of the textbook.  The Grade point average data is on the PolyLearn in the file GPA.jmp.  Run a regression of GPA (y, in grade points) vs. ACT score (x, in ACT points) and make a scatterplot of the variables with a regression line on it.  Answer the following questions about the data instead of the questions in the textbook.
+\begin{enumerate}
+    \item What is the estimated regression function?
+    \item Is there a linear association between the freshman GPA and ACT score?  State the null and alternative hypotheses for the appropriate test.  Explain how you determine the result of the test using a $5\%$ level of significance, then write an interpretation of the result in the context of the data.
+    \item What does the $R^{2}$ of this regression mean in the context of the data?
+    \item Write a sentence explaining the meaning of the slope of this regression with $95\%$ confidence.
+    \item Write a sentence explaining the meaning of the intercept of this regression with $95\%$ confidence.  Is the intercept meaningful?  Explain.
+\end{enumerate}
+\end{problem}
+
+\begin{answer}{7}
+$ $\newline
+\begin{enumerate}
+    \item $\^y=2.114+0.0388271x$
+    \item 
+    \begin{equation}
+    \begin{split}
+    & H_{0} : \beta_{1} = 0 \\
+    & H_{0} : \beta_{1} \neq 0 \\
+    & \alpha = 0.05
+    \end{split}
+    \end{equation}
+    With a p value of 0.0029 and a significance value of $0.05$, we have enough evidence to reject the null hypothesis and accept our alternate hypothesis, that there is a positive linear association between GPA and ACT score.
+    \item With $R^{2} = 0.07$, it means that our model explains $7\%$ of the variation of $y$.
+    \item We have $95\%$ confidence that the true slope of this regression is contained in the interval $(0.0135531,0.00641212)$. That an increase in one point in the ACT is associated with an increase in the mean GPA by that true coefficient.
+    \item We have $95\%$ confidence that the true intercept of this regression is contained in the interval $(1.4785,0.2.749508)$. That at a score of 0 on the ACT we expect the average GPA to be that true coefficient.The intercept is not meaningful as we are extrapolating, there was no 0 ACT scores observed.
+\end{enumerate}
+\end{answer}
+
+\begin{problem}{8}
+$ $\newline
+Read the introduction to Problem 1.22 on page 36 of the textbook.  The Plastic hardness data is on the PolyLearn in the file Plastic.jmp.  Run a regression of hardness (y, in Brinell units) vs. time (x, in hours) and make a scatterplot of the variables with a regression line on it.  Answer the following questions about the data instead of the questions in the textbook.
+\begin{enumerate}
+    \item What is the estimated regression function?
+    \item What is the value of $e_{1}$, the residual of the first observation?  Explain how $e_{1}$ differs from $\epsilon_{1}$, the error for the first observation.
+    \item Is there a linear association between the number of times a carton is transferred and the number of ampules broken?  State the null and alternative hypotheses for the appropriate test.  Explain how you determine the result of the test using a $5\%$ level of significance, then write an interpretation of the result in the context of the data.
+    \item Write a sentence explaining the meaning of the slope of this regression with $95\%$ confidence.
+    \item Write a sentence explaining the meaning of the intercept of this regression with $95\%$ confidence.  Is the intercept meaningful? Explain.
+\end{enumerate}
+\end{problem}
+
+\begin{answer}{8}
+$ $\newline
+\begin{enumerate}
+    \item $\^y=168.6+2.034375x$
+    \item 
+    \begin{equation}
+    \begin{split}
+    & \^y = 201.15 \\
+    & y = 199 \\
+    & \^y - y = -2.15 \\
+    & e_{1} = -2.15
+    \end{split}
+    \end{equation}
+    The difference between $e_{1}$ and $\epsilon_{1}$, is that the first is an estimation of the error, the residual which does the observed value minus the predicted value, while the latter is the difference between the observed value and the true mean of the predictor variable at that level.
+    \item 
+    \begin{equation}
+    \begin{split}
+    & H_{0} : \beta_{1} = 0 \\
+    & H_{0} : \beta_{1} \neq 0 \\
+    & \alpha = 0.05
+    \end{split}
+    \end{equation}
+    With a p value which is less than 0.0001 and a significance value of $0.05$, we have enough evidence to reject the null hypothesis and accept our alternate hypothesis, that there is a positive linear association between hardness and time.
+    \item We have $95\%$ confidence that the true slope of this regression is contained in the interval $(1.8404996,2.228504)$. That an increase in one point in the time is associated with an increase in the mean hardness by that true coefficient.
+    \item We have $95\%$ confidence that the true intercept of this regression is contained in the interval $(162.90125,174.29875)$. That at a time of 0 we expect the average hardness to be that true coefficient.The intercept is not meaningful as we are extrapolating, there was no observation with a time of 0.
+\end{enumerate}
+\end{answer}
+
+\begin{problem}{9}
+$ $\newline
+Compute the following quantities in R using the Plastic hardness data and answer questions about them below.  A tab-delimited text file of this data is on PolyLearn in the file Plastic.txt. The R script STAT334-HW1-Plastic.r contains code to set up the data into a response vector y and a design matrix X.  You will have to type in the formulas for the different calculations below on your own.
+\begin{enumerate}
+    \item Write out the coefficient vector b.
+    \item What are the standard errors of $b_{0}$ and $b_{1}$?
+    \item What are the covariance and correlation between $b_{0}$ and $b_{1}$?
+    \item Compute the $R^{2}$ of this regression and interpret what it means in the context of the data.
+    \item If the hardness of plastic sample 2 were increased by 1, how much would the predicted hardness of plastic sample 2 change?
+    \item If the hardness of plastic sample #14 were increased by 1, how much would the predicted hardness of plastic sample #2 change? 
+    \item Show that the vectors e and $\ˆy$ are orthogonal to each other. What is the correlation between these two vectors?
+\end{enumerate}
+\end{problem}
+
+\begin{answer}{9}
+$ $\newline
+\begin{enumerate}
+    \item \[
+\begin{bmatrix}
+    168.6 \\
+    2.034375 \\
+\end{bmatrix}
+            \]
+    \item \[
+\begin{bmatrix}
+    7.0597768 & -0.228789063.6 \\
+    -0.2287891 & 0.008171038 \\
+\end{bmatrix}
+            \]
+            The variance of $b_{0}$ is $a_{1,1}$, and the variance of $b_{1}$ is $a_{2,2}$.
+
+\item \[
+\begin{bmatrix}
+    7.0597768 & -0.228789063.6 \\
+    -0.2287891 & 0.008171038 \\
+\end{bmatrix}
+            \]
+            The variance of $b_{0}$ and $b_{1}$ is $a_{1,2}$ or $a_{2,1}$.
+    \item $-0.9525793$
+    \item $0.175$
+    \item $-0.05$
+    \item \textbf{R} tells us that $e^{'}\^y = -8.504912e^{-10}$. Due to rounding the answer is not 0, but it is supposed to be. Since the dot product of $e$ and $\^y$ is 0, they are orthogonal. Since they are orthogonal, their correlation is 0.
+\end{enumerate}
+\end{answer}
+
+\begin{problem}{11}
+$ $\newline
+    \begin{enumerate}
+        \item Using version A of the model, interpret both of the estimated coefficients in the context of the problem. 
+        \item Using version B of the model, interpret both of the estimated coefficients in the context of the problem. 
+        \item Using version C of the model, interpret both of the estimated coefficients in the context of the problem. 
+    \end{enumerate}
+\end{problem}
+
+\begin{answer}{11}
+$ $\newline
+    \begin{enumerate}
+        \item \[b = 
+\begin{bmatrix}
+    12.22222 \\
+    46.85000 \\
+\end{bmatrix}
+            \]
+            This is the Model for 2 Population Means. The first value is the mean for Adult and the second is the mean for Child
+        \item \[b = 
+\begin{bmatrix}
+    29.53611 \\
+    -17.31389 \\
+\end{bmatrix}
+            \]
+            This is the ANOVA Model. The first value is the overall mean and the second is the effect of being an Adult.
+        \item \[b = 
+\begin{bmatrix}
+    46.85000 \\
+    -34.62778 \\
+\end{bmatrix}
+            \]
+            This is the baseline model. The first value is the Child mean. The second value is the difference between Adult mean and Child mean.
+    \end{enumerate}
+\end{answer}
+
+
+\end{document}

@@ -21,12 +21,16 @@ x1.A <- ifelse(x.text == "Adult", 1, 0)
 x2.A <- ifelse(x.text == "Child", 1, 0)
 X.A <- cbind(x1.A,x2.A)
 
+solve(t(X.A) %*% X.A) %*% (t(X.A) %*% y)
 # Creating the design matrix X.B for the two means parameterization of the model
 # We will call this version A of the model
 x1.B <- ifelse(x.text == "Adult", 1, ifelse(x.text == "Child", -1, 0))
 X.B <- cbind(x0,x1.B)
 
+solve(t(X.B) %*% X.B) %*% (t(X.B) %*% y)
 # Creating the design matrix X.C for the two means parameterization of the model
 # We will call this version C of the model
 x1.C <- ifelse(x.text == "Adult", 1, 0)
 X.C <- cbind(x0,x1.C)
+
+solve(t(X.C) %*% X.C) %*% (t(X.C) %*% y)
