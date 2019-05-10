@@ -1,0 +1,87 @@
+---
+title: "HW4"
+author: "Anish"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(broom)
+library(car)
+```
+
+```{r message=FALSE, warning=FALSE}
+BrandPref <- read_csv("HW4/BrandPref.csv")
+
+model <- lm(Liking ~ Moisture + Sweetness, data = BrandPref)
+summary(model)
+```
+```{r}
+confint(model, 'Moisture', level = 0.995)
+confint(model, 'Sweetness', level = 0.995)
+```
+
+```{r}
+residualPlots(model,type="rstudent")
+qqPlot(rstudent(model),distribution="norm",pch=20,id=FALSE)
+```
+
+```{r}
+anova(lm(Liking ~ Moisture + Sweetness, data = BrandPref), 
+      lm(Liking ~ factor(Moisture) * factor(Sweetness), data = BrandPref))
+```
+
+```{r}
+new.dat <- data.frame(Moisture=4,Sweetness=4)
+predict(model, newdata = new.dat, interval = 'confidence',level = 0.99)
+predict(model, newdata = new.dat, interval = 'prediction',level = 0.99)
+```
+
+```{r message=FALSE, warning=FALSE}
+com <- read_csv("HW4/CommProp.csv")
+
+com_model <- lm(Rental ~ Age + Expenses + Vacancy + Sqft, data = com)
+summary(com_model)
+```
+```{r}
+confint(com_model, 'Age', level = 0.9875)
+confint(com_model, 'Expenses', level = 0.9875)
+confint(com_model, 'Vacancy', level = 0.9875)
+confint(com_model, 'Sqft', level = 0.9875)
+```
+
+```{r}
+residualPlots(com_model,type="rstudent")
+qqPlot(rstudent(com_model),distribution="norm",pch=20,id=FALSE)
+```
+
+```{r}
+avPlots(com_model,pch=20,id=FALSE)
+```
+
+```{r}
+seq_tests <- anova(lm(Rental ~ Sqft + Age + Expenses + Vacancy, data = com))
+seq_tests
+```
+
+```{r}
+reduced <- lm(Rental ~ Sqft + Age + Expenses, data = com)
+full <- lm(Rental ~ Sqft + Age + Expenses + Vacancy, data = com)
+
+anova(reduced, full)
+```
+
+```{r}
+reduced <- lm(Rental ~ Sqft + Age, data = com)
+full <- lm(Rental ~ Sqft + Age + Expenses + Vacancy, data = com)
+
+anova(reduced, full)
+```
+
+```{r}
+full <- lm(Rental ~ Age + Expenses + Vacancy + Sqft, data = com)
+reduced <- lm(Rental ~ Age + Expenses + Vacancy + Sqft, data = com)
+
+```
+
